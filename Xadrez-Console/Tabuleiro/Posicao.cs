@@ -14,7 +14,7 @@ namespace Tabuleiro {
 
         public override string ToString() {
             StringBuilder sb = new StringBuilder();
-            sb.Append("Douglas");
+            sb.Append("Linha {0} \n Coluna{1}", linha, coluna);
 
             return sb.ToString();
         }
