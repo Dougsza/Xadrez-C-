@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Tabuleiro {
+namespace tabuleiro {
     class Peca_Tabuleiro {
         public Posicao posicao { get; set; }
         public Cor cor { get; protected set; }

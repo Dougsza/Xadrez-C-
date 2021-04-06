@@ -1,7 +1,7 @@
 ﻿using System;
-using Tabuleiro;
+using tabuleiro;
 
-namespace Tabuleiro {
+namespace tabuleiro {
     class Tabuleiro_Classe {
         public int linhas { get; set; }
         public int colunas { get; set; }
@@ -16,5 +16,6 @@ namespace Tabuleiro {
         public Peca_Tabuleiro peca(int linha,int coluna) {
             return Pecas[linha, coluna];
         }
+        
     }
 }

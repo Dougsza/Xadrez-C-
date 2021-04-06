@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text;
 
-namespace Tabuleiro {
+namespace tabuleiro {
     class Posicao {
 
         public int linha { get; set; }

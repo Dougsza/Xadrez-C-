@@ -1,5 +1,5 @@
 ﻿using System;
-using Tabuleiro;
+using tabuleiro;
 
 namespace Xadrez_Console {
     class Tela {
@@ -8,9 +8,15 @@ namespace Xadrez_Console {
 
             for(int i = 0; i < tabuleiro.linhas; i++) {               
                 for(int j = 0; j < tabuleiro.colunas; j++) {
-
+                     if(tabuleiro.peca(i, j) == null) {
+                        Console.Write("- ");
+                    }
+                    else {
+                        Console.WriteLine(tabuleiro.peca(i, j) + " ");
+                    }                
 
                 }
+                Console.WriteLine();
             }
         }
     }
