@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using Tabuleiro;
 
 namespace Tabuleiro {
     class Tabuleiro_Classe {
@@ -13,6 +12,9 @@ namespace Tabuleiro {
             this.linhas = linhas;
             this.colunas = colunas;
             Pecas = new Peca_Tabuleiro[linhas,colunas];
+        }
+        public Peca_Tabuleiro peca(int linha,int coluna) {
+            return Pecas[linha, coluna];
         }
     }
 }

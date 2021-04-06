@@ -16,5 +16,6 @@ namespace Tabuleiro {
             this.qtdMovimentos = 0;
 
         }
+     
     }
 }
