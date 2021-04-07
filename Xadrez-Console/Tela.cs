@@ -12,7 +12,7 @@ namespace Xadrez_Console {
                         Console.Write("- ");
                     }
                     else {
-                        Console.WriteLine(tabuleiro.peca(i, j) + " ");
+                        Console.Write(tabuleiro.peca(i, j) + " ");
                     }                
 
                 }
