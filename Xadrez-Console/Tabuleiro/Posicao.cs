@@ -12,11 +12,11 @@ namespace tabuleiro {
             this.coluna = coluna;
         }
 
-        public override string ToString() {
-            StringBuilder sb = new StringBuilder();
-            sb.Append("Linha {0} \n Coluna{1}", linha, coluna);
+        public override string ToString() { 
 
-            return sb.ToString();
+            return linha
+                + ", "
+                + coluna;
         }       
     }
 }
