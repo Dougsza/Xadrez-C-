@@ -15,11 +15,11 @@ namespace tabuleiro {
             pecas = new Peca_Tabuleiro[linhas,colunas];
         }
 
-        //Este método ajuda a verificar se dentro da matriz Peca_Tabuleiro esta vazia (null)
+        //Este método ajuda a verificar se dentro da matriz Peca_Tabuleiro esta vazia (null) no For da classe Tela
         public Peca_Tabuleiro peca(int linha,int coluna) {
             return pecas[linha,coluna];
         }     
-
+        //Sobrecarda de peca
         public Peca_Tabuleiro peca(Posicao pos) {
             return pecas[pos.linha,pos.coluna];
         }   
@@ -32,7 +32,7 @@ namespace tabuleiro {
             pecas[posicao.linha,posicao.coluna] = peca;
             peca.posicao = posicao;
         }   
-
+        //Verifica se existe uma peça na posição que entra no método
         public bool ExistePeca(Posicao pos) {
             ValidarPosicao(pos);
             return peca(pos) != null;

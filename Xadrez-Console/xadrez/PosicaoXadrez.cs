@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using tabuleiro;
-
+// Essa classe converte letras em números na matriz do tabuleiro
 namespace xadrez {
     class PosicaoXadrez {
         public char coluna;
