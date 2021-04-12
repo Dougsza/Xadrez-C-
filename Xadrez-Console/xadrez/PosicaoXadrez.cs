@@ -9,10 +9,11 @@ namespace xadrez {
         public int linha;
 
         public PosicaoXadrez(char coluna,int linha) {
-            this.coluna = coluna;
             this.linha = linha;
+            this.coluna = coluna;
         }
 
+        //Converte  posição em letras e numeros ex(c ,7)
         public Posicao ToPosicao() {
             return new Posicao(8 - linha,coluna - 'a');
         }

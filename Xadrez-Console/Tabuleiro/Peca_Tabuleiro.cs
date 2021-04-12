@@ -16,6 +16,10 @@ namespace tabuleiro {
             this.qtdMovimentos = 0;
 
         }
+
+        public void icrementaMovimento() {
+            qtdMovimentos += 1;
+        }
      
     }
 }
