@@ -10,19 +10,36 @@ namespace Xadrez_Console {
 
             for(int i = 0; i < tabuleiro.linhas; i++) {
                 Console.Write(8 - i +" ");
-                for(int j = 0; j < tabuleiro.colunas; j++) {
-                     if(tabuleiro.peca(i, j) == null) {
-                        Console.Write("- ");
-                    }
-                    else {
-                        ImprimirPeca(tabuleiro.peca(i,j));
-                    }                
-
+                for(int j = 0; j < tabuleiro.colunas; j++) {               
+                     ImprimirPeca(tabuleiro.peca(i,j));                             
                 }
                 Console.WriteLine();
             }
             Console.Write("  a b c d e f g h");
-            Console.WriteLine();
+            
+            
+        }      
+        public static void ImprimeTabuleiro(Tabuleiro_Classe tabuleiro, bool[,] posicoesPossiveis) {
+            //Essa variável pega a cor do fundo original do console
+            ConsoleColor fundoOriginal = Console.BackgroundColor;
+            //Essa variável pega a cor Ciano e mostra o caminho que a peça pode se mover
+            ConsoleColor fundoAlterado = ConsoleColor.DarkCyan;
+
+            for(int i = 0; i < tabuleiro.linhas; i++) {
+                Console.Write(8 - i +" ");
+                for(int j = 0; j < tabuleiro.colunas; j++) {      
+                    if(posicoesPossiveis[i,j]) {
+                        Console.BackgroundColor = fundoAlterado;
+                    }
+                    else {
+                        Console.BackgroundColor = fundoOriginal;
+                    }
+                     ImprimirPeca(tabuleiro.peca(i,j));                             
+                }
+                Console.WriteLine();
+            }
+            Console.Write("  a b c d e f g h");
+            Console.BackgroundColor = fundoOriginal;
             
         }
 
@@ -36,7 +53,9 @@ namespace Xadrez_Console {
 
         //Imprime a peça do tabuleiro 
         public static void ImprimirPeca(Peca_Tabuleiro peca) {
-            if(peca.cor == Cor.Branca) {
+            if(peca == null) {
+                Console.Write("- ");
+            }else if(peca.cor == Cor.Branca) {
                 Console.Write(peca+" ");
             }
             else {

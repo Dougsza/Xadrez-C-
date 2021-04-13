@@ -25,12 +25,12 @@ namespace tabuleiro {
         }   
 
         //Coloca a peça em uma posição do Tabuleiro
-        public void ColocarPeca(Peca_Tabuleiro peca,Posicao Pos) {
-            if(ExistePeca(Pos)) {
+        public void ColocarPeca(Peca_Tabuleiro peca,Posicao pos) {
+            if(ExistePeca(pos)) {
                 throw new TabuleiroException("Já existe uma peça nessa posição");
             }
-            pecas[Pos.linha,Pos.coluna] = peca;
-            peca.posicao = Pos;
+            pecas[pos.linha,pos.coluna] = peca;
+            peca.posicao = pos;
         }  
         
         //Retira as peças do Tabuleiro
@@ -38,6 +38,7 @@ namespace tabuleiro {
             if(peca(pos) == null) {
                 return null;
             }
+            //Variável do tipo auxiliar que pega a peça na posição do parâmetro do metodo que deixa a posição da peça nula
             Peca_Tabuleiro aux = peca(pos);
             aux.posicao = null;
             pecas[pos.linha,pos.coluna] = null;

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 
 namespace tabuleiro {
-    class Peca_Tabuleiro {
+   abstract class Peca_Tabuleiro {
         public Posicao posicao { get; set; }
         public Cor cor { get; protected set; }
         public int qtdMovimentos { get; protected set; }
@@ -16,7 +16,9 @@ namespace tabuleiro {
             this.qtdMovimentos = 0;
 
         }
+        public abstract bool[,] movimentosPossiveis();
 
+      
         public void icrementaMovimento() {
             qtdMovimentos += 1;
         }
