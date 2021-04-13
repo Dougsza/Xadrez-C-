@@ -19,6 +19,7 @@ namespace xadrez {
             Posicao pos = new Posicao(0,0);
 
             //Acima
+            //Coloca na variavel pos os valores da posicao.linha
             pos.DefinirValores(posicao.linha - 1,posicao.coluna);
             while(tabuleiro.PosicaoValida(pos) && _podeMover(pos)) {
                 matriz[pos.linha,pos.coluna] = true;
