@@ -1,5 +1,5 @@
-## Xadrez de Console no Visual Studio 
-Criando um jogo de Xadrez no console VisualStudio.
+## Xadrez no Console 
+Criando um jogo de Xadrez.
 
 
 ## Projeto
