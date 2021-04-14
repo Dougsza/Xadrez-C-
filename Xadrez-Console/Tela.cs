@@ -8,15 +8,14 @@ namespace Xadrez_Console {
         //Imprime o tabuleiro
         public static void ImprimeTabuleiro(Tabuleiro_Classe tabuleiro) {
 
-            for(int i = 0; i < tabuleiro.linhas; i++) {
-                Console.Write("     ");
+            for(int i = 0; i < tabuleiro.linhas; i++) {       
                 Console.Write(8 - i +" ");
                 for(int j = 0; j < tabuleiro.colunas; j++) {               
                      ImprimirPeca(tabuleiro.peca(i,j));                             
                 }
                 Console.WriteLine();
             }
-            Console.Write("       a b c d e f g h");
+            Console.Write("  a b c d e f g h");
             
             
         }      
@@ -26,8 +25,7 @@ namespace Xadrez_Console {
             //Essa variável pega a cor Ciano e mostra o caminho que a peça pode se mover
             ConsoleColor fundoAlterado = ConsoleColor.DarkCyan;
 
-            for(int i = 0; i < tabuleiro.linhas; i++) {
-                Console.Write("     ");
+            for(int i = 0; i < tabuleiro.linhas; i++) {                
                 Console.Write(8 - i +" ");
                 for(int j = 0; j < tabuleiro.colunas; j++) {      
                     if(posicoesPossiveis[i,j]) {
@@ -40,7 +38,7 @@ namespace Xadrez_Console {
                 }
                 Console.WriteLine();
             }
-            Console.Write("       a b c d e f g h");
+            Console.Write("  a b c d e f g h");
             Console.BackgroundColor = fundoOriginal;
             
         }
