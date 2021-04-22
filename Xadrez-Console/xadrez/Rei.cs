@@ -4,6 +4,7 @@ namespace xadrez {
     class Rei : Peca_Tabuleiro {
 
         public Rei(Cor cor, Tabuleiro_Classe tab) : base(cor, tab) {
+           
 
         }
         private bool _PodeMover(Posicao pos) {
@@ -14,7 +15,7 @@ namespace xadrez {
             bool[,] matriz = new bool[tabuleiro.linhas,tabuleiro.colunas];
 
             Posicao pos = new Posicao(0,0);
-
+            
             //Acima
             pos.DefinirValores(posicao.linha - 1,posicao.coluna);
             if(tabuleiro.PosicaoValida(pos) && _PodeMover(pos)) {

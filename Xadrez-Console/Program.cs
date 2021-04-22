@@ -13,10 +13,7 @@ namespace Xadrez_Console {
                 while(!partida.partidaTerminada) {
                     try {
                         Console.Clear();
-                        Tela.ImprimeTabuleiro(partida.tab);
-                        Console.WriteLine("\n");
-                        Console.Write("Turno: {0}\nVez da peça: {1}",partida.turno,partida.jogadorAtual);
-                        Console.WriteLine("\n");
+                        Tela.ImprimirPartida(partida);                      
                         Console.Write("Origem: ");
                         Posicao origem = Tela.LerPosicaoXadrez().ToPosicao();
                         //Valida a posição Origem
