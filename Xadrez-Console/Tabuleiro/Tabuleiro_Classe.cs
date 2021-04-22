@@ -14,14 +14,17 @@ namespace tabuleiro {
             this.colunas = colunas;
             _pecas = new Peca_Tabuleiro[linhas,colunas];
         }
+
         //Este método ajuda a verificar se dentro da matriz Peca_Tabuleiro esta vazia (null) no For da classe Tela
         public Peca_Tabuleiro peca(int linha,int coluna) {
             return _pecas[linha,coluna];
-        }     
+        }    
+        
         //Sobrecarda de peca
         public Peca_Tabuleiro peca(Posicao pos) {
             return _pecas[pos.linha,pos.coluna];
         }   
+
         //Coloca a peça em uma posição do Tabuleiro
         public void ColocarPeca(Peca_Tabuleiro peca,Posicao pos) {
             if(ExistePeca(pos)) {
@@ -29,7 +32,8 @@ namespace tabuleiro {
             }
             _pecas[pos.linha,pos.coluna] = peca;
             peca.posicao = pos;
-        }          
+        }  
+        
         //Retira as peças do Tabuleiro
         public Peca_Tabuleiro RetirarPeca(Posicao pos) {
             if(peca(pos) == null) {
@@ -41,11 +45,13 @@ namespace tabuleiro {
             _pecas[pos.linha,pos.coluna] = null;
             return aux;
         }
+
         //Verifica se existe uma peça na posição que entra no método
         public bool ExistePeca(Posicao pos) {
             ValidarPosicao(pos);
             return peca(pos) != null;
         }
+
         //Verifica se a posição é valida
         public bool PosicaoValida(Posicao pos) {
             if(pos.linha <0 || pos.linha >=linhas || pos.coluna <0 || pos.coluna >=colunas) {
@@ -53,6 +59,7 @@ namespace tabuleiro {
             }
             return true;
         }
+
         /*Verifica o resultado que retornou do método PosicaoValida e caso o retorno do
          método for falso ele envia uma Exception personalizada para a classe TabuleiroExpection*/
         public void ValidarPosicao(Posicao pos) {
@@ -60,5 +67,6 @@ namespace tabuleiro {
                 throw new TabuleiroException("Posição invalida!");
             }
         }
+
     }    
 }

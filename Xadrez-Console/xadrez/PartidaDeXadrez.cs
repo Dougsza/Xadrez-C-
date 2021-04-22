@@ -12,7 +12,7 @@ namespace xadrez {
         public Cor jogadorAtual { get; private set; }
         private HashSet<Peca_Tabuleiro> _pecas;
         private HashSet<Peca_Tabuleiro> _capturadas;
-
+        public bool xeque { get; private set; }
         public PartidaDeXadrez() {
             tab = new Tabuleiro_Classe(8,8);
             partidaTerminada = false;
@@ -26,29 +26,28 @@ namespace xadrez {
 
             _ColocarPecas();
         }
-        //Pega a origem e destino do jogador e envia para o método de executar movimento
-        public void RealizaJogada(Posicao origem, Posicao destino) {
-            ExecutaMovimento(origem,destino);
-            turno++;
-            _MudaJogador();
-        }
+
         //Valida a Posição de origem ao usuário escolher sua posição
         public void ValidaPosicaoOrigem(Posicao pos) {
             if(tab.peca(pos) == null) {
                 throw new TabuleiroException("Não existe peça nessa posição de origem");                
             }
+
             if(jogadorAtual != tab.peca(pos).cor) {
                 throw new TabuleiroException("Não é a vez dessa peça!");                
             }
+
             if(!tab.peca(pos).ExisteMovimentosPossiveis()) {
                 throw new TabuleiroException("Não existe movimentos possiveis para a peça escolhida  ");               
             }
         }
+
         public void ValidarPosicaoDestino(Posicao origem, Posicao destino) {
             if(!tab.peca(origem).PodeMoverPara(destino)) {
                 throw new TabuleiroException("Posição de destino invalida!");
             }
         }
+
         private void _MudaJogador() {
             //Verifica a cor do jogador atual e troca de cor
             if(jogadorAtual == Cor.Branca) {
@@ -57,7 +56,8 @@ namespace xadrez {
             else
                 jogadorAtual = Cor.Branca;
         }
-        public void ExecutaMovimento(Posicao origem, Posicao destino) {
+
+        public Peca_Tabuleiro ExecutaMovimento(Posicao origem, Posicao destino) {
             Peca_Tabuleiro p = tab.RetirarPeca(origem);
             p.IcrementaMovimento();
             Peca_Tabuleiro pecaCapturada = tab.RetirarPeca(destino);
@@ -66,7 +66,37 @@ namespace xadrez {
             if(pecaCapturada != null) {
                 _capturadas.Add(pecaCapturada);
             }
+            return pecaCapturada;
         }
+
+        public void DesfazMovimento(Posicao origem, Posicao destino, Peca_Tabuleiro pecaCapturada) {
+            Peca_Tabuleiro p = tab.RetirarPeca(destino);
+            p.DecrenentaMovimento();
+            if(pecaCapturada != null) {
+                tab.ColocarPeca(pecaCapturada,destino);
+                _capturadas.Remove(pecaCapturada);
+            }
+            tab.ColocarPeca(p,origem);
+        }
+
+        //Pega a origem e destino do jogador e envia para o método de executar movimento
+        public void RealizaJogada(Posicao origem, Posicao destino) {
+            Peca_Tabuleiro pecaCapturada = ExecutaMovimento(origem,destino);
+            if(EstaEmXeque(jogadorAtual)) {
+                DesfazMovimento(origem,destino,pecaCapturada);
+                throw new TabuleiroException("Você não pode se colocar em xeque");
+            }
+            if(EstaEmXeque(_Adversaria(jogadorAtual))) {
+                xeque = true;
+            }
+            else {
+                xeque = false;
+            }
+
+            turno++;
+            _MudaJogador();
+        }
+
         //Método que mostra quantas peças ainda estão no jogo com a cor informada
         public HashSet<Peca_Tabuleiro> PecasEmJogo(Cor cor) {
             HashSet<Peca_Tabuleiro> aux = new HashSet<Peca_Tabuleiro>();
@@ -78,6 +108,7 @@ namespace xadrez {
             aux.ExceptWith(PecasCapturadas(cor));
             return aux;
         }
+
         //Método para separar as peças de cada cor
         public HashSet<Peca_Tabuleiro> PecasCapturadas(Cor cor) {
             HashSet<Peca_Tabuleiro> aux = new HashSet<Peca_Tabuleiro>();
@@ -88,11 +119,47 @@ namespace xadrez {
             }
             return aux;
         }
+
+        private Cor _Adversaria(Cor cor) {
+            if(cor == Cor.Branca) {
+                return Cor.Preta;
+            }
+            else {
+                return Cor.Branca;
+            }
+        }
+        
+        //Verifica se existe um rei com a cor informada no metodo na partida
+        private Peca_Tabuleiro _Rei(Cor cor) {
+            foreach (Peca_Tabuleiro x in PecasEmJogo(cor)) {
+                if(x is Rei) {
+                    return x;
+                }
+            }
+            return null;
+        }
+
+        //Verifica se a cor da pela informada está em xeque
+        public bool EstaEmXeque(Cor cor) {
+            Peca_Tabuleiro R = _Rei(cor);
+            if(R == null) {
+                throw new TabuleiroException("Não tem rei da cor "+ cor +" no tabuleiro!");
+            }
+            foreach(Peca_Tabuleiro x in PecasEmJogo(_Adversaria(cor))) {
+                bool[,] mat = x.MovimentosPossiveis();
+                if(mat[R.posicao.linha,R.posicao.coluna]) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
         //Método auxiliar para colocar pecas
         public void ColocarNovaPeca(char coluna, int linha, Peca_Tabuleiro peca) {
             tab.ColocarPeca(peca,new PosicaoXadrez(coluna,linha).ToPosicao());
             _pecas.Add(peca);
         }
+
         private void _ColocarPecas() {
             //Colocando as peças brancas no tabuleiro
             ColocarNovaPeca('c',1,new Torre(Cor.Branca,tab));
@@ -109,7 +176,6 @@ namespace xadrez {
             ColocarNovaPeca('d',7,new Torre(Cor.Preta,tab));           
             ColocarNovaPeca('e',8,new Torre(Cor.Preta,tab));           
             ColocarNovaPeca('e',7,new Torre(Cor.Preta,tab));           
-
         }        
     }
 }

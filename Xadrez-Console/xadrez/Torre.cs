@@ -28,6 +28,7 @@ namespace xadrez {
                 }
                 pos.linha = pos.linha - 1;
             }
+
             //Abaixo
             pos.DefinirValores(posicao.linha + 1,posicao.coluna);
             while(tabuleiro.PosicaoValida(pos) && _PodeMover(pos)) {
@@ -36,7 +37,8 @@ namespace xadrez {
                     break;
                 }
                 pos.linha = pos.linha + 1;
-            }      
+            } 
+            
             //Direita
             pos.DefinirValores(posicao.linha ,posicao.coluna +1);
             while(tabuleiro.PosicaoValida(pos) && _PodeMover(pos)) {
@@ -45,7 +47,8 @@ namespace xadrez {
                     break;
                 }
                 pos.coluna = pos.coluna + 1;
-            }      
+            }
+            
             //Esquerda
             pos.DefinirValores(posicao.linha ,posicao.coluna -1);
             while(tabuleiro.PosicaoValida(pos) && _PodeMover(pos)) {
@@ -57,9 +60,11 @@ namespace xadrez {
             }
             return matriz;
         }
+
         public override string ToString() {
             return "T";
         }
+
     }
 }
 

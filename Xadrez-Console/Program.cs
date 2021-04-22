@@ -16,6 +16,7 @@ namespace Xadrez_Console {
                         Tela.ImprimirPartida(partida);                      
                         Console.Write("Origem: ");
                         Posicao origem = Tela.LerPosicaoXadrez().ToPosicao();
+
                         //Valida a posição Origem
                         partida.ValidaPosicaoOrigem(origem);
 

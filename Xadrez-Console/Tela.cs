@@ -13,7 +13,12 @@ namespace Xadrez_Console {
             ImprimirPecasCapturadas(partida);
             Console.WriteLine("Turno " + partida.turno);
             Console.WriteLine("Aguardando pela peça "+ partida.jogadorAtual);
+            if(partida.xeque) {
+                Console.WriteLine("XEQUE");
+            }
+            Console.WriteLine();
         }
+
         //Imprime o tabuleiro
         public static void ImprimeTabuleiro(Tabuleiro_Classe tabuleiro) {
 
@@ -26,6 +31,7 @@ namespace Xadrez_Console {
             }
             Console.Write("  a b c d e f g h");
         }
+
         //Imprime o caminho aonde a peça pode ir
         public static void ImprimeTabuleiro(Tabuleiro_Classe tabuleiro, bool[,] posicoesPossiveis) {
             //Essa variável pega a cor do fundo original do console
@@ -49,6 +55,7 @@ namespace Xadrez_Console {
             Console.Write("  a b c d e f g h");
             Console.BackgroundColor = fundoOriginal;
         }
+
         //Imprime todas as peças capturadas de cada cor
         public static void ImprimirPecasCapturadas(PartidaDeXadrez partida) {
             Console.WriteLine("Peças capturadas: ");
@@ -62,6 +69,7 @@ namespace Xadrez_Console {
             Console.ForegroundColor = aux;
             Console.WriteLine();
         }
+
         //Esse método pega as peças de
         public static void ImprimirConjunto(HashSet<Peca_Tabuleiro> conjunto) {
             Console.Write("[ ");
@@ -70,6 +78,7 @@ namespace Xadrez_Console {
             }
             Console.Write("]");
         }
+
         //Lê a posição em que o usuário quer que a peça se movimente
         public static PosicaoXadrez LerPosicaoXadrez() {
             string s = Console.ReadLine();
@@ -77,6 +86,7 @@ namespace Xadrez_Console {
             int linha = int.Parse(s[1] + "");
             return new PosicaoXadrez(coluna,linha);
         }
+
         //Imprime a peça do tabuleiro 
         public static void ImprimirPeca(Peca_Tabuleiro peca) {
             if(peca == null) {
@@ -93,5 +103,6 @@ namespace Xadrez_Console {
                 Console.ForegroundColor = aux;
             }
         }
+
     }
 }
