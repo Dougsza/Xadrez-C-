@@ -92,9 +92,13 @@ namespace xadrez {
             else {
                 xeque = false;
             }
-
-            turno++;
-            _MudaJogador();
+            if(TesteXequeMate(_Adversaria(jogadorAtual))) {
+                partidaTerminada = true;
+            }
+            else {
+                turno++;
+                _MudaJogador();
+            }          
         }
 
         //Método que mostra quantas peças ainda estão no jogo com a cor informada
@@ -152,6 +156,27 @@ namespace xadrez {
                 }
             }
             return false;
+        }
+        public bool TesteXequeMate(Cor cor) {
+            if(!EstaEmXeque(cor)) {
+                return false;
+            }
+            foreach(Peca_Tabuleiro x in PecasEmJogo(cor)) {
+                bool[,] mat = x.MovimentosPossiveis();
+                for(int i=0; i < tab.linhas; i++) {
+                    for(int j=0; j<tab.colunas; j++) {
+                        Posicao origem = x.posicao;
+                        Posicao destino = new Posicao(i,j);
+                        Peca_Tabuleiro pecaCapturada = ExecutaMovimento(origem,destino);
+                        bool testeXeque = EstaEmXeque(cor);
+                        DesfazMovimento(origem,destino,pecaCapturada);
+                        if(!testeXeque) {
+                            return false;
+                        }
+                    }
+                }
+            }
+            return true;
         }
 
         //Método auxiliar para colocar pecas
