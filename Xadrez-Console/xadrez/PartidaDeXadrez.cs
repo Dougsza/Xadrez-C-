@@ -188,7 +188,7 @@ namespace xadrez {
         private void _ColocarPecas() {
             //Colocando as peças brancas no tabuleiro
             ColocarNovaPeca('c',1,new Torre(Cor.Branca,tab));
-            ColocarNovaPeca('c',2,new Torre(Cor.Branca,tab));
+            ColocarNovaPeca('c',2,new Peao(Cor.Branca,tab));
             ColocarNovaPeca('d',1,new Rei(Cor.Branca,tab));
             ColocarNovaPeca('d',2,new Torre(Cor.Branca,tab));
             ColocarNovaPeca('e',1,new Torre(Cor.Branca,tab));

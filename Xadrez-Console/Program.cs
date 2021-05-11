@@ -40,6 +40,7 @@ namespace Xadrez_Console {
                         Console.ReadLine();
                     }
                  }
+                
 
                 /*PosicaoXadrez xadrez = new PosicaoXadrez('c',2);
                 Console.WriteLine(xadrez); 
